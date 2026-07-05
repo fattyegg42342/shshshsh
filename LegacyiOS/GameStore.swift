@@ -49,7 +49,7 @@ final class GameStore:ObservableObject {
             do {
                 let g=try await Task.detached(priority:.userInitiated){try IPAImporter.importIPA(url,to:dir)}.value
                 games.append(g)
-                games.sort{$0.name.localizedCaseInsensitiveCompare($1.name)==.orderedAscending}
+               games.sort{$0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending}
                 save()
                 log("Imported \(g.name) [\(g.arch)]")
             } catch {
