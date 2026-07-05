@@ -1,0 +1,19 @@
+name: build unsigned ipa
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - run: chmod +x scripts/build_frontend.sh
+      - run: ./scripts/build_frontend.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LegacyiOS-unsigned
+          path: LegacyiOS-unsigned.ipa
